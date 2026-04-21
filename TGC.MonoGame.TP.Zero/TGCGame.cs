@@ -27,8 +27,8 @@ public class TGCGame : Game
     private Vector3 _carPosition; // Guarda la posicion actual del auto
     private float _carSpeed; // Velocidad con la que se desplaza
 
-    private const float _acceleration = 500f; // Aceleracion con la que cambia la velocidad
-    private const float _friction = 0.98f; // Friccion que hace que el auto pierda velocidad
+    private const float Acceleration = 500f; // Aceleracion con la que cambia la velocidad
+    private const float Friction = 0.98f; // Friccion que hace que el auto pierda velocidad
     
     // Rotacion
     private float _carRotation; // Guarda la rotacion actual del auto
@@ -117,6 +117,7 @@ public class TGCGame : Game
     protected override void Update(GameTime gameTime)
     {
         // Variables de estado del auto locales
+        
         Matrix rotationMatrix = Matrix.CreateRotationY(_carRotation);
         // Se toma en cuenta que la matriz de rotacion contiene la direccion a la que apunta el frente del auto
         Vector3 carForward = rotationMatrix.Forward;
@@ -141,16 +142,16 @@ public class TGCGame : Game
         // Acelerar con W
         if (keyboardState.IsKeyDown(Keys.W))
         {
-            _carSpeed += _acceleration * deltaTime;
+            _carSpeed += Acceleration * deltaTime;
         }
         // Desacelerar con S
         if (keyboardState.IsKeyDown(Keys.S))
         {
-            _carSpeed -= _acceleration * deltaTime;
+            _carSpeed -= Acceleration * deltaTime;
         }
 
         // Aplico la friccion del suelo al auto
-        _carSpeed *= _friction;
+        _carSpeed *= Friction;
 
         // Aplico la velocidad al auto segun el cambio de aceleracion
         _carPosition += carForward * _carSpeed * deltaTime;
